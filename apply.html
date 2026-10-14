@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apply | Apex Elite Lending LLC</title><meta name="description" content="Start a business-purpose loan inquiry with Apex Elite Lending."><meta name="theme-color" content="#0a1628">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap nav"><a class="brand" href="index.html"><img src="logo.png" alt="Apex Elite logo" width="40" height="40">Apex Elite <span>Lending</span></a>
+<button id="mt" aria-label="Menu" onclick="document.querySelector('nav.links').classList.toggle('open')">☰</button>
+<nav class="links"><a href="index.html">Home</a><a href="business-loans.html">Business Loans</a><a href="personal-loans.html">Personal Loans</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a class="btn" href="apply.html">Apply</a></nav></div></header>
+<main>
+<div class="page-h"><div class="wrap"><h1>Apply for a Business Loan</h1><p>Start with a quick inquiry. We'll follow up personally.</p></div></div>
+<section><div class="wrap" style="max-width:760px"><div class="notice"><b>Do not include sensitive information.</b> This form never asks for your Social Security number, bank account details, or ID numbers. When you press Send, it opens a prefilled email in your own mail app addressed to contact@apexelitelending.com <span class="todo">TODO: confirm email</span>. Nothing is stored on this website.</div>
+<form class="card" id="f"><div class="row2"><div><label for="name">Full name *</label><input id="name" required autocomplete="name"></div><div><label for="biz">Business name *</label><input id="biz" required autocomplete="organization"></div>
+<div><label for="em">Email *</label><input id="em" type="email" required autocomplete="email"></div><div><label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel"></div></div>
+<label for="amt">Amount requested *</label><select id="amt" required><option value="">Select…</option><option>$1,000</option><option>$1,500</option><option>$2,000</option><option>$2,500</option></select>
+<label for="pur">Business purpose *</label><select id="pur" required><option value="">Select…</option><option>Equipment / tools</option><option>Inventory / supplies</option><option>Cash flow</option><option>Marketing</option><option>Other business purpose</option></select>
+<label for="msg">Message</label><textarea id="msg" rows="4" placeholder="Tell us about your business and how you'd use the funds. Please don't include SSNs or bank details."></textarea>
+<label style="font-weight:400;display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="bp" required style="width:auto;margin-top:6px"> I confirm this request is for a business purpose, not personal, family, or household use. *</label>
+<p style="margin-top:18px"><button class="btn" type="submit">Send inquiry by email</button></p><p class="note">Submitting an inquiry is not a loan application approval or commitment to lend. See our <a href="privacy.html">Privacy Policy</a>.</p></form>
+<script>f.addEventListener('submit',e=>{e.preventDefault();const v=id=>document.getElementById(id).value.trim();
+const body=`Name: ${v('name')}\nBusiness: ${v('biz')}\nEmail: ${v('em')}\nPhone: ${v('ph')}\nAmount requested: ${v('amt')}\nPurpose: ${v('pur')}\nBusiness-purpose confirmed: Yes\n\nMessage:\n${v('msg')}`;
+location.href='mailto:contact@apexelitelending.com?subject='+encodeURIComponent('Business loan inquiry - '+v('biz'))+'&body='+encodeURIComponent(body)});</script>
+<p class="note">Business-purpose loans only. Not a consumer lender at this time.</p></div></section></main>
+<footer><div class="wrap"><div class="fgrid"><div><a class="brand" href="index.html" style="display:flex"><img src="logo.png" alt="" width="32" height="32">Apex Elite <span>Lending</span> LLC</a>
+<p>Small business-purpose loans for Texas entrepreneurs. Based in Frisco, Texas.</p><p>Email: <a style="display:inline" href="mailto:contact@apexelitelending.com">contact@apexelitelending.com</a> <span class="todo">TODO: confirm email</span></p></div>
+<div><b>Company</b><a href="index.html">Home</a><a href="business-loans.html">Business Loans</a><a href="personal-loans.html">Personal Loans</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div><div><b>Get started</b><a href="apply.html">Apply</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
+<div class="disc"><b>Business-purpose loans only. Not a consumer lender at this time.</b> Personal loans are coming soon, pending Texas licensing; Apex Elite Lending LLC does not currently offer, make, or arrange consumer loans. All loans are subject to application, review, and approval. Rates shown are maximums and examples, not offers. © 2026 Apex Elite Lending LLC, Frisco, Texas.</div></div></footer>
+</body></html>

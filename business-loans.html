@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Loans | Apex Elite Lending LLC</title><meta name="description" content="Business-purpose loans from $1,000 to $2,500, maximum 18% APR, with an example payment calculator."><meta name="theme-color" content="#0a1628">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap nav"><a class="brand" href="index.html"><img src="logo.png" alt="Apex Elite logo" width="40" height="40">Apex Elite <span>Lending</span></a>
+<button id="mt" aria-label="Menu" onclick="document.querySelector('nav.links').classList.toggle('open')">☰</button>
+<nav class="links"><a href="index.html">Home</a><a href="business-loans.html" class=on>Business Loans</a><a href="personal-loans.html">Personal Loans</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a class="btn" href="apply.html">Apply</a></nav></div></header>
+<main>
+<div class="page-h"><div class="wrap"><h1>Business Loans</h1><p>Small, straightforward funding for Texas businesses.</p></div></div>
+<section><div class="wrap"><div class="grid"><div class="card"><h3>Loan amounts</h3><p class="out">$1,000 to $2,500</p><p class="note">First-time borrowers may be offered a smaller amount. Repeat borrowers in good standing may qualify for more over time.</p></div>
+<div class="card"><h3>Rate</h3><p class="out">Up to 18% APR</p><p class="note">Fixed rate, never above 18% APR. Your actual rate depends on our review.</p></div>
+<div class="card"><h3>Terms</h3><p class="out">Fixed monthly payments</p><p class="note">Term lengths are set case by case and shown in your written loan agreement before you sign.</p></div></div>
+<h2 style="margin-top:50px">Common uses</h2><ul class="check"><li>Equipment and tools</li><li>Inventory and supplies</li><li>Short-term cash-flow gaps</li><li>Marketing, licenses, or small upgrades</li></ul></div></section>
+<section class="alt" id="calculator"><div class="wrap"><h2>Example payment calculator</h2><p class="lead">Estimate a fixed monthly payment. This is an illustration only, not an offer or a quote.</p>
+<div class="card" style="max-width:640px"><div class="row2"><div><label for="amt">Loan amount ($)</label><input id="amt" type="number" min="1000" max="2500" step="100" value="2000"></div>
+<div><label for="apr">APR (%)</label><input id="apr" type="number" min="0" max="18" step="0.5" value="18"></div></div>
+<label for="term">Term (months)</label><select id="term"><option>3</option><option>6</option><option selected>12</option><option>18</option><option>24</option></select>
+<p style="margin-top:20px">Estimated monthly payment</p><p class="out" id="pay">-</p><p id="tot" class="note"></p>
+<p class="note">Assumes equal monthly payments and simple interest, with no fees. Amounts are limited to $1,000 to $2,500 and APR to 18%. Actual terms, APR, and payments are in your written agreement and may differ.</p></div>
+<script>
+function calc(){let a=Math.min(2500,Math.max(1000,+amt.value||0)),r=Math.min(18,Math.max(0,+apr.value||0))/1200,n=+term.value;
+let p=r?a*r/(1-Math.pow(1+r,-n)):a/n;pay.textContent='$'+p.toFixed(2);tot.textContent=`${n} payments · total repaid $${(p*n).toFixed(2)} · total interest $${(p*n-a).toFixed(2)} (on $${a.toLocaleString()})`}
+['amt','apr','term'].forEach(i=>document.getElementById(i).addEventListener('input',calc));calc();</script></div></section>
+<section><div class="wrap"><h2>Typical requirements</h2><p class="lead">Examples of what we generally look for. We'll tell you exactly what's needed for your application.</p>
+<ul class="check"><li>A Texas-based business, generally operating 12+ months (6+ months may be considered with strong owner credit)</li>
+<li>An EIN or assumed-name (DBA) certificate</li><li>3 to 6 months of business bank statements, with deposits that comfortably support the payment</li>
+<li>Valid government ID for each owner, plus identity verification</li><li>A credit review, done only with your signed consent</li>
+<li>A personal guaranty from owners of 20% or more, and a signed business-purpose certification</li><li>A clear, legitimate business use for the funds</li></ul>
+<p class="note">We do not lend to illegal businesses, for gambling, or to refinance other lenders or merchant cash advances. Approval is not guaranteed.</p>
+<p><a class="btn" href="apply.html">Apply now</a></p><div class="notice">Business-purpose loans only. Not a consumer lender at this time.</div></div></section></main>
+<footer><div class="wrap"><div class="fgrid"><div><a class="brand" href="index.html" style="display:flex"><img src="logo.png" alt="" width="32" height="32">Apex Elite <span>Lending</span> LLC</a>
+<p>Small business-purpose loans for Texas entrepreneurs. Based in Frisco, Texas.</p><p>Email: <a style="display:inline" href="mailto:contact@apexelitelending.com">contact@apexelitelending.com</a> <span class="todo">TODO: confirm email</span></p></div>
+<div><b>Company</b><a href="index.html">Home</a><a href="business-loans.html">Business Loans</a><a href="personal-loans.html">Personal Loans</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div><div><b>Get started</b><a href="apply.html">Apply</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
+<div class="disc"><b>Business-purpose loans only. Not a consumer lender at this time.</b> Personal loans are coming soon, pending Texas licensing; Apex Elite Lending LLC does not currently offer, make, or arrange consumer loans. All loans are subject to application, review, and approval. Rates shown are maximums and examples, not offers. © 2026 Apex Elite Lending LLC, Frisco, Texas.</div></div></footer>
+</body></html>
