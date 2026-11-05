@@ -20,3 +20,4 @@ details{background:var(--navy2);border:1px solid var(--line);border-radius:12px;
 footer{border-top:1px solid var(--line);padding:40px 0 30px;color:var(--mut);font-size:14px}.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer a{color:var(--mut);text-decoration:none;display:block;margin:4px 0}footer a:hover{color:var(--gold)}.disc{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
 .legal h2{font-size:22px;margin-top:30px}
 @media(max-width:860px){#mt{display:block}nav.links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--navy);flex-direction:column;padding:16px;border-bottom:1px solid var(--line);align-items:flex-start}nav.links.open{display:flex}.fgrid,.row2{grid-template-columns:1fr}.hero{padding:56px 0 46px}}
+nav.links a[href="personal-loans-jamaica.html"],footer a[href="personal-loans-jamaica.html"]{color:var(--gold)!important}
