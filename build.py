@@ -1,5 +1,5 @@
 EMAIL='contact@apexelitelending.com'
-TODO='<span class="todo">TODO: confirm email</span>'
+TODO=''
 DISC='Business-purpose loans only. Not a consumer lender at this time.'
 NAV=[('index.html','Home'),('business-loans.html','Business Loans'),('personal-loans-jamaica.html','Personal Loans (Jamaica)'),('about.html','About'),('faq.html','FAQ'),('contact.html','Contact')]
 def page(fn,title,desc,body):
