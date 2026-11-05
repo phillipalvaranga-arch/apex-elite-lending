@@ -1,7 +1,7 @@
 EMAIL='contact@apexelitelending.com'
 TODO='<span class="todo">TODO: confirm email</span>'
 DISC='Business-purpose loans only. Not a consumer lender at this time.'
-NAV=[('index.html','Home'),('business-loans.html','Business Loans'),('personal-loans.html','Personal Loans'),('about.html','About'),('faq.html','FAQ'),('contact.html','Contact')]
+NAV=[('index.html','Home'),('business-loans.html','Business Loans'),('personal-loans-jamaica.html','Personal Loans (Jamaica)'),('about.html','About'),('faq.html','FAQ'),('contact.html','Contact')]
 def page(fn,title,desc,body):
     links=''.join(f'<a href="{h}"{" class=on" if h==fn else ""}>{t}</a>' for h,t in NAV)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,7 +14,7 @@ def page(fn,title,desc,body):
 <footer><div class="wrap"><div class="fgrid"><div><a class="brand" href="index.html" style="display:flex"><img src="logo.png" alt="" width="32" height="32">Apex Elite <span>Lending</span> LLC</a>
 <p>Small business-purpose loans for Texas entrepreneurs. Based in Frisco, Texas.</p><p>Email: <a style="display:inline" href="mailto:{EMAIL}">{EMAIL}</a> {TODO}</p></div>
 <div><b>Company</b>{''.join(f'<a href="{h}">{t}</a>' for h,t in NAV)}</div><div><b>Get started</b><a href="apply.html">Apply</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
-<div class="disc"><b>{DISC}</b> Personal loans are coming soon, pending Texas licensing; Apex Elite Lending LLC does not currently offer, make, or arrange consumer loans. All loans are subject to application, review, and approval. Rates shown are maximums and examples, not offers. © 2026 Apex Elite Lending LLC, Frisco, Texas.</div></div></footer>
+<div class="disc"><b>{DISC}</b> Personal loans in Jamaica are <a style="display:inline" href="personal-loans-jamaica.html">coming soon, launching once licensed by the Bank of Jamaica</a>; Apex Elite Lending LLC does not currently offer, make, or arrange consumer loans in Texas or Jamaica. All loans are subject to application, review, and approval. Rates shown are maximums and examples, not offers. © 2026 Apex Elite Lending LLC, Frisco, Texas.</div></div></footer>
 </body></html>'''
 P={}
 P['index.html']=('Small Business Loans in Frisco, Texas','Apex Elite Lending offers small business-purpose loans of $1,000 to $2,500 at no more than 18% APR.',f'''
@@ -31,8 +31,9 @@ P['index.html']=('Small Business Loans in Frisco, Texas','Apex Elite Lending off
 <div class="card"><h3>Built for small amounts</h3><p>Many lenders won't bother with small loans. We focus on the $1,000 to $2,500 range that helps a small business cover equipment, inventory, or a cash-flow gap.</p></div>
 <div class="card"><h3>Capped, transparent pricing</h3><p>Our rates never exceed 18% APR, within Texas limits for business loans. You'll see every cost in writing up front.</p></div>
 <div class="card"><h3>Local & personal</h3><p>We're a Frisco-based company. You'll deal directly with the people making decisions, not a call center.</p></div>
+<div class="card"><span class="pill">Coming soon</span><h3>Personal loans: Jamaica</h3><p>We're preparing personal loans for people living in Jamaica, launching once licensed by the Bank of Jamaica. <a href="personal-loans-jamaica.html">See the plan and calculator</a>.</p></div>
 <div class="card"><h3>Fair & consistent</h3><p>Every application is reviewed against the same written criteria. We never promise "guaranteed approval."</p></div></div>
-<div class="notice">{DISC} Personal loans are <a href="personal-loans.html">coming soon, pending Texas licensing</a>.</div></div></section>''')
+<div class="notice">{DISC} Personal loans for borrowers in Jamaica are <a href="personal-loans-jamaica.html">coming soon, launching once licensed by the Bank of Jamaica</a>.</div></div></section>''')
 P['business-loans.html']=('Business Loans','Business-purpose loans from $1,000 to $2,500, maximum 18% APR, with an example payment calculator.',f'''
 <div class="page-h"><div class="wrap"><h1>Business Loans</h1><p>Small, straightforward funding for Texas businesses.</p></div></div>
 <section><div class="wrap"><div class="grid"><div class="card"><h3>Loan amounts</h3><p class="out">$1,000 to $2,500</p><p class="note">First-time borrowers may be offered a smaller amount. Repeat borrowers in good standing may qualify for more over time.</p></div>
@@ -60,7 +61,63 @@ P['personal-loans.html']=('Personal Loans: Coming Soon','Personal loans from Ape
 <div class="page-h"><div class="wrap"><span class="pill">Coming soon</span><h1>Personal Loans</h1><p>Pending Texas licensing.</p></div></div>
 <section><div class="wrap" style="max-width:780px"><p>Apex Elite Lending plans to offer small personal installment loans in the future. <b>We are not licensed to make consumer loans yet, and we do not currently offer, make, or arrange personal, family, or household loans.</b> We'll announce here when that changes.</p>
 <div class="notice"><b>Want to know when personal loans are available?</b><br>Email <a href="mailto:{EMAIL}?subject=Personal%20loans%20-%20notify%20me&body=Please%20let%20me%20know%20when%20personal%20loans%20become%20available.">{EMAIL}</a> {TODO} with the subject "Notify me." Joining the interest list is not an application and is not a commitment to lend.</div>
+<div class="notice"><b>New: Personal loans for Jamaica.</b> We're preparing personal loans for borrowers living in Jamaica, launching once licensed by the Bank of Jamaica. <a href="personal-loans-jamaica.html">See Personal Loans: Jamaica</a>.</div>
 <p>If you need funding for a <b>business purpose</b>, see our <a href="business-loans.html">business loans</a>.</p><p class="note">{DISC}</p></div></section>''')
+JMFAQ=[('Can I apply today?','Not yet. Apex Elite Lending is not yet licensed by the Bank of Jamaica, and in Jamaica it is an offence to offer microcredit without a licence. You can join the interest list, and we will contact you when we launch.'),
+('Is joining the interest list an application?','No. It only tells us you are interested. It is not an application, an approval, or a promise to lend.'),
+('What interest rate will I pay?','We have not set rates yet. Jamaican law requires a licensed lender to tell you the rate and how it is calculated in writing, and to show the Effective Annual Interest Rate (EAIR) most prominently. You will see all of this before you sign anything.'),
+('Can interest be charged on the original amount the whole time?','No. Under the Microcredit Act, interest and late penalties must be calculated on the outstanding balance, not the original amount borrowed.'),
+('Why does the form not ask for my TRN?',"To protect you. We will never ask for your TRN, bank details, or card numbers through this website. After we are licensed, identity checks will be done through a secure process."),
+('Will I be paid in Jamaican dollars?','We expect loans to be made and repaid in Jamaican dollars (JMD). The USD view in the calculator is only for comparison.'),
+('How can I check whether a lender is licensed?','The Bank of Jamaica publishes its list of licensed microcredit institutions on its website. Always check it before borrowing from anyone, including us.'),
+('Where can I complain about a lender in Jamaica?','The Consumer Affairs Commission (CAC) handles consumer complaints about licensed microcredit institutions.')]
+P['personal-loans-jamaica.html']=('Personal Loans: Jamaica (Coming Soon)','Personal loans for borrowers in Jamaica from Apex Elite Lending, coming soon and launching once licensed by the Bank of Jamaica.',f'''
+<div class="page-h"><div class="wrap"><span class="pill">Coming soon</span><h1>Personal Loans: Jamaica</h1><p>Launching once licensed by the Bank of Jamaica.</p></div></div>
+<section><div class="wrap" style="max-width:860px"><div class="notice"><b>We are not lending in Jamaica yet.</b> Apex Elite Lending LLC is <b>not currently licensed</b> by the Bank of Jamaica under the Microcredit Act, 2021, and does not offer, make, or arrange personal loans in Jamaica today. We are not taking applications. This page explains our plans so you know what to expect.</div>
+<p>We plan to offer small, fixed-payment personal loans to people living in Jamaica, in Jamaican dollars, with every cost shown in writing before you sign. You can always check whether any lender is licensed on the <a href="https://boj.org.jm/core-functions/financial-system/microcredit-regulation/list-of-licensed-microcredit-institutions/" target="_blank" rel="noopener">Bank of Jamaica's list of licensed microcredit institutions</a>.</p></div></section>
+<section class="alt" id="calculator"><div class="wrap"><h2>Personal loan calculator</h2><p class="lead">See what a loan could cost. This is an illustration only, not an offer, a quote, or our rate.</p>
+<div class="card" style="max-width:720px"><div class="row2"><div><label for="cur">Currency</label><select id="cur"><option value="JMD" selected>Jamaican dollars (JMD)</option><option value="USD">US dollars (USD)</option></select></div>
+<div><label for="fx">Exchange rate (JMD per US$1)</label><input id="fx" type="number" min="1" step="0.5" value="160"></div>
+<div><label for="jamt">Loan amount (<span id="cl">JMD</span>)</label><input id="jamt" type="number" min="0" step="1000" value="200000"></div>
+<div><label for="jrate">Annual interest rate (%)</label><input id="jrate" type="number" min="0" max="200" step="0.5" value="30"></div>
+<div><label for="jterm">Term (months)</label><input id="jterm" type="number" min="1" max="60" step="1" value="12"></div></div>
+<div class="grid" style="margin-top:18px"><div><p class="note">Monthly payment</p><p class="out" id="jpay">-</p></div><div><p class="note">Total interest</p><p class="out" id="jint">-</p></div><div><p class="note">Total repaid</p><p class="out" id="jtot">-</p></div><div><p class="note">Effective annual rate (EAIR)</p><p class="out" id="jeair">-</p></div></div>
+<h3 style="margin-top:22px">Payment summary</h3><div style="overflow-x:auto"><table id="am" style="width:100%;border-collapse:collapse;font-size:15px"></table></div>
+<p class="note">Assumes equal monthly payments, interest charged monthly on the remaining balance, and no fees. EAIR = (1 + rate ÷ 12)<sup>12</sup> − 1. The exchange rate is a rough example you can change; check a current rate with your bank or the Bank of Jamaica. Real loans may include fees and different terms, all shown in writing before you sign.</p></div>
+<script>
+const f0=(v,c)=>(c=='JMD'?'J$':'US$')+v.toLocaleString(undefined,{{minimumFractionDigits:2,maximumFractionDigits:2}});
+let lastCur='JMD';
+cur.addEventListener('change',()=>{{let x=+fx.value||1,a=+jamt.value||0;jamt.value=cur.value=='USD'&&lastCur=='JMD'?(a/x).toFixed(0):cur.value=='JMD'&&lastCur=='USD'?(a*x).toFixed(0):a;lastCur=cur.value;cl.textContent=cur.value;jc()}});
+function jc(){{const c=cur.value,a=Math.max(0,+jamt.value||0),R=Math.max(0,+jrate.value||0),r=R/1200,n=Math.max(1,Math.round(+jterm.value||1));
+const p=r?a*r/(1-Math.pow(1+r,-n)):a/n;jpay.textContent=f0(p,c);jint.textContent=f0(p*n-a,c);jtot.textContent=f0(p*n,c);jeair.textContent=((Math.pow(1+r,12)-1)*100).toFixed(2)+'%';
+let b=a,rows=[],yi=0,yp=0,yr=1;for(let m=1;m<=n;m++){{const i=b*r,pr=p-i;b=Math.max(0,b-pr);yi+=i;yp+=pr;if(m%12==0||m==n){{rows.push(`<tr><td>Year ${{yr}} (to month ${{m}})</td><td>${{f0(yp,c)}}</td><td>${{f0(yi,c)}}</td><td>${{f0(b,c)}}</td></tr>`);yr++;yi=0;yp=0}}}}
+am.innerHTML='<tr style="text-align:left;color:var(--gold)"><th>Period</th><th>Principal paid</th><th>Interest paid</th><th>Balance left</th></tr>'+rows.join('');
+am.querySelectorAll('td,th').forEach(e=>{{e.style.padding='8px';e.style.borderBottom='1px solid var(--line)'}})}}
+['fx','jamt','jrate','jterm'].forEach(i=>document.getElementById(i).addEventListener('input',jc));jc();</script></div></section>
+<section><div class="wrap"><div class="grid">
+<div class="card"><h3>Who can apply (once we launch)</h3><ul class="check"><li>Adults 18 or older living in Jamaica</li><li>A valid Jamaican government photo ID</li><li>Steady income you can show</li><li>A clear ability to repay, which we must check</li></ul><p class="note">Final rules will be set when we are licensed. Approval will never be guaranteed.</p></div>
+<div class="card"><h3>Documents usually needed</h3><ul class="check"><li><b>Jamaican ID:</b> driver's licence, passport, or national voter ID</li><li><b>TRN (Taxpayer Registration Number):</b> required for identity checks, but collected only through our secure process later, <b>never on this website</b></li><li><b>Proof of income:</b> recent pay slips, a job letter, or bank statements</li><li><b>Proof of address:</b> a recent utility bill or bank statement</li></ul></div></div>
+<h2 style="margin-top:50px">How it will work</h2><div class="grid">
+<div class="card"><div class="num">1</div><h3>Join the interest list</h3><p>Name, contact, and a rough amount. Nothing sensitive.</p></div>
+<div class="card"><div class="num">2</div><h3>We contact you after licensing</h3><p>Once the Bank of Jamaica licenses us, we reach out and explain the next steps.</p></div>
+<div class="card"><div class="num">3</div><h3>Secure review</h3><p>We verify your identity and check that the loan is affordable for you, as the law requires.</p></div>
+<div class="card"><div class="num">4</div><h3>Written terms, then funding</h3><p>You get the full agreement, with rate, EAIR, fees, and payment dates, before you sign. Then funds are sent and you repay in fixed monthly payments.</p></div></div></div></section>
+<section class="alt" id="interest"><div class="wrap" style="max-width:760px"><h2>Join the interest list</h2><p class="lead">This is not an application. We will only contact you once we are licensed.</p>
+<div class="notice"><b>Do not include sensitive information.</b> Never send your TRN, bank or card numbers, or passwords. When you press Send, your own email app opens with a prefilled message to {EMAIL} {TODO}. Nothing is stored on this website.</div>
+<form class="card" id="jf"><div class="row2"><div><label for="jn">Full name *</label><input id="jn" required autocomplete="name"></div><div><label for="je">Email or phone *</label><input id="je" required autocomplete="email"></div></div>
+<label for="ja">Rough amount you might need *</label><select id="ja" required><option value="">Select…</option><option>Under J$100,000</option><option>J$100,000 to J$250,000</option><option>J$250,000 to J$500,000</option><option>Over J$500,000</option></select>
+<p style="margin-top:18px"><button class="btn" type="submit">Send by email</button></p><p class="note">Joining is not an application and is not a commitment to lend. See our <a href="privacy.html">Privacy Policy</a>.</p></form>
+<script>jf.addEventListener('submit',e=>{{e.preventDefault();const v=i=>document.getElementById(i).value.trim();
+location.href='mailto:{EMAIL}?subject='+encodeURIComponent('Jamaica personal loans - interest list')+'&body='+encodeURIComponent(`Name: ${{v('jn')}}\\nEmail or phone: ${{v('je')}}\\nRough amount: ${{v('ja')}}\\n\\nPlease contact me when personal loans in Jamaica are available.`)}});</script></div></section>
+<section><div class="wrap" style="max-width:820px"><h2>Questions</h2>{''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in JMFAQ)}
+<h2 style="margin-top:40px">Important disclosures</h2><div class="notice">
+<p><b>Not licensed yet.</b> Apex Elite Lending LLC (Frisco, Texas, USA) is not currently licensed by the Bank of Jamaica as a microcredit institution and does not currently offer, make, or arrange loans in Jamaica. No applications are being accepted.</p>
+<p><b>No offer or guarantee.</b> Calculator results are examples only, not offers, quotes, or our rates. Any future loan will depend on application, identity checks, an affordability review, approval, and a signed written agreement. Approval is never guaranteed.</p>
+<p><b>Rates.</b> When we lend, we will state the interest rate and how it is calculated in writing, show the Effective Annual Interest Rate (EAIR) most prominently, and charge interest and late penalties only on the outstanding balance, as required by the <a href="https://japarliament.gov.jm/attachments/article/339/The%20Microcredit%20Act,%202021.pdf" target="_blank" rel="noopener">Microcredit Act, 2021</a>.</p>
+<p><b>Identity checks.</b> Licensed lenders in Jamaica must verify customer identity and follow anti-money-laundering laws, including the Proceeds of Crime Act.</p>
+<p><b>Complaints.</b> Consumer complaints about licensed microcredit lenders can be made to the Consumer Affairs Commission of Jamaica.</p></div>
+<p>Need a loan for a Texas business? See our <a href="business-loans.html">business loans</a>.</p></div></section>''')
+
 P['about.html']=('About Us','About Apex Elite Lending LLC, a small business lender based in Frisco, Texas.',f'''
 <div class="page-h"><div class="wrap"><h1>About Apex Elite Lending</h1><p>A Frisco, Texas company focused on small business funding.</p></div></div>
 <section><div class="wrap" style="max-width:820px"><p>Apex Elite Lending LLC is a new, independently owned lending company based in Frisco, Texas. We started with a simple idea: small businesses sometimes need a small amount of capital, and they deserve a lender who treats a $1,500 request as seriously as a large one.</p>
@@ -70,7 +127,7 @@ P['about.html']=('About Us','About Apex Elite Lending LLC, a small business lend
 faq=[('Who can apply?','Texas small businesses and business owners who need funds for a business purpose, such as equipment, inventory, or cash flow.'),
 ('How much can I borrow?','Business-purpose loans currently range from $1,000 to $2,500. First-time borrowers may be offered a smaller amount.'),
 ('What is the interest rate?','Rates are fixed and never exceed 18% APR. Your rate depends on our review and appears in your written agreement before you sign.'),
-('Do you offer personal loans?','Not yet. Personal loans are coming soon, pending Texas licensing. We currently make business-purpose loans only and are not a consumer lender at this time.'),
+('Do you offer personal loans?','Not yet. Personal loans for borrowers in Jamaica are coming soon, launching once licensed by the Bank of Jamaica. Personal loans in Texas still need Texas licensing. Today we make business-purpose loans only and are not a consumer lender. See <a href="personal-loans-jamaica.html">Personal Loans: Jamaica</a>.'),
 ('Can I use a business loan for personal expenses?',"No. Loans must be used primarily for business purposes, and you'll sign a business-purpose certification."),
 ('Do you check credit?','We may review credit as part of underwriting, only with your signed consent. A credit history alone doesn\'t decide an application.'),
 ('Is approval guaranteed?','No. Every application is reviewed against the same written criteria, and approval is never guaranteed.'),
