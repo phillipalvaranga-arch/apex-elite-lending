@@ -1,11 +1,11 @@
 :root{--navy:#0a1628;--navy2:#11223d;--line:#24365a;--gold:#f2b83a;--gold2:#ffd27a;--fg:#e8edf5;--mut:#9aa8bf}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}section,.page-h{scroll-margin-top:80px}body{margin:0;background:var(--navy);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 a{color:var(--gold)}img{max-width:100%}.wrap{max-width:1120px;margin:auto;padding:0 20px}
 header{position:sticky;top:0;z-index:9;background:#0a1628f2;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px}.brand{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;font-weight:800;letter-spacing:.3px}.brand img{width:40px;height:40px}.brand span{color:var(--gold)}
 nav.links{display:flex;gap:20px;align-items:center}nav.links a{color:var(--fg);text-decoration:none;font-weight:500;font-size:15px}nav.links a:hover,nav.links a.on{color:var(--gold)}
 .btn{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1300!important;font-weight:700;padding:12px 22px;border-radius:10px;text-decoration:none;border:0;cursor:pointer;font-size:16px}.btn.ghost{background:none;color:var(--gold)!important;border:1px solid var(--gold)}
-#mt{display:none;background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 10px;font-size:20px}
+#mt{display:none;background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 10px;font-size:20px;min-width:44px;min-height:44px}
 .hero{padding:90px 0 70px;background:radial-gradient(900px 400px at 80% 0,#1d3561 0,transparent 70%)}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.12;margin:0 0 18px}.hero h1 em{color:var(--gold);font-style:normal}.hero p{font-size:19px;color:var(--mut);max-width:640px}
 .pill{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:4px 14px;font-size:13px;font-weight:600;margin-bottom:16px}
 section{padding:56px 0}section.alt{background:var(--navy2)}h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 10px}h2+p.lead{color:var(--mut);margin-top:0}h3{color:var(--gold);margin:0 0 6px}
@@ -19,5 +19,12 @@ label{display:block;font-weight:600;margin:14px 0 6px;font-size:15px}input,selec
 details{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}summary{cursor:pointer;font-weight:700}details p{color:var(--mut);margin-bottom:0}
 footer{border-top:1px solid var(--line);padding:40px 0 30px;color:var(--mut);font-size:14px}.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer a{color:var(--mut);text-decoration:none;display:block;margin:4px 0}footer a:hover{color:var(--gold)}.disc{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
 .legal h2{font-size:22px;margin-top:30px}
-@media(max-width:860px){#mt{display:block}nav.links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--navy);flex-direction:column;padding:16px;border-bottom:1px solid var(--line);align-items:flex-start}nav.links.open{display:flex}.fgrid,.row2{grid-template-columns:1fr}.hero{padding:56px 0 46px}}
+.uses{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));list-style:none;padding:0;margin:18px 0}
+.uses li{margin:0;background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 36px}
+section.alt .uses li{background:var(--navy)}
+.schedule{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.schedule table{min-width:560px}
+@media(max-width:1100px){#mt{display:block}nav.links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--navy);flex-direction:column;padding:8px 16px 16px;border-bottom:1px solid var(--line);align-items:stretch;gap:0;max-height:calc(100dvh - 68px);overflow:auto;z-index:10}nav.links.open{display:flex}nav.links a{display:flex;align-items:center;min-height:44px;padding:10px 8px;font-size:17px}.hero{padding:56px 0 46px}.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:800px){.fgrid,.row2{grid-template-columns:1fr}.out{font-size:28px}section{padding:42px 0}.page-h{padding:42px 0 20px}}
+@media(max-width:380px){.brand{font-size:14px;gap:8px}.wrap{padding:0 14px}}
 nav.links a[href="personal-loans-jamaica.html"],footer a[href="personal-loans-jamaica.html"]{color:var(--gold)!important}

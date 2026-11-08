@@ -1,20 +1,31 @@
 EMAIL='contact@apexelitelending.com'
 TODO=''
+def todo(prefix=' '):
+    return f'{prefix}{TODO}' if TODO else ''
+# Bump when published content changes so installed copies drop the previous cache.
+ASSET_VERSION='1'
+CACHE_NAME=f'apex-elite-v{ASSET_VERSION}'
 DISC='Business-purpose loans only. Not a consumer lender at this time.'
 NAV=[('index.html','Home'),('business-loans.html','Business Loans'),('personal-loans-jamaica.html','Personal Loans (Jamaica)'),('about.html','About'),('faq.html','FAQ'),('contact.html','Contact')]
+def link(h,t,fn=None):
+    on=' class=on' if fn and h==fn else ''
+    gold=' style="color:var(--gold)"' if h=='personal-loans-jamaica.html' else ''
+    return f'<a href="{h}"{on}{gold}>{t}</a>'
 def page(fn,title,desc,body):
-    links=''.join(f'<a href="{h}"{" class=on" if h==fn else ""}>{t}</a>' for h,t in NAV)
+    links=''.join(link(h,t,fn) for h,t in NAV)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} | Apex Elite Lending LLC</title><meta name="description" content="{desc}"><meta name="theme-color" content="#0a1628">
-<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="stylesheet" href="style.css"></head><body>
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Apex Elite"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css?v={ASSET_VERSION}"></head><body>
 <header><div class="wrap nav"><a class="brand" href="index.html"><img src="logo.png" alt="Apex Elite logo" width="40" height="40">Apex Elite <span>Lending</span></a>
 <button id="mt" aria-label="Menu" onclick="document.querySelector('nav.links').classList.toggle('open')">☰</button>
 <nav class="links">{links}<a class="btn" href="apply.html">Apply</a></nav></div></header>
 <main>{body}</main>
 <footer><div class="wrap"><div class="fgrid"><div><a class="brand" href="index.html" style="display:flex"><img src="logo.png" alt="" width="32" height="32">Apex Elite <span>Lending</span> LLC</a>
-<p>Small business-purpose loans for Texas entrepreneurs. Based in Frisco, Texas.</p><p>Email: <a style="display:inline" href="mailto:{EMAIL}">{EMAIL}</a> {TODO}</p></div>
-<div><b>Company</b>{''.join(f'<a href="{h}">{t}</a>' for h,t in NAV)}</div><div><b>Get started</b><a href="apply.html">Apply</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
+<p>Small business-purpose loans for Texas entrepreneurs. Based in Frisco, Texas.</p><p>Email: <a style="display:inline" href="mailto:{EMAIL}">{EMAIL}</a>{todo()}</p></div>
+<div><b>Company</b>{''.join(link(h,t) for h,t in NAV)}</div><div><b>Get started</b><a href="apply.html">Apply</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
 <div class="disc"><b>{DISC}</b> Personal loans in Jamaica are <a style="display:inline" href="personal-loans-jamaica.html">coming soon, launching once licensed by the Bank of Jamaica</a>; Apex Elite Lending LLC does not currently offer, make, or arrange consumer loans in Texas or Jamaica. All loans are subject to application, review, and approval. Rates shown are maximums and examples, not offers. © 2026 Apex Elite Lending LLC, Frisco, Texas.</div></div></footer>
+<script>if('serviceWorker' in navigator){{navigator.serviceWorker.register('sw.js').catch(function(){{}})}}</script>
 </body></html>'''
 P={}
 P['index.html']=('Small Business Loans in Frisco, Texas','Apex Elite Lending offers small business-purpose loans of $1,000 to $2,500 at no more than 18% APR.',f'''
@@ -60,9 +71,10 @@ let p=r?a*r/(1-Math.pow(1+r,-n)):a/n;pay.textContent='$'+p.toFixed(2);tot.textCo
 P['personal-loans.html']=('Personal Loans: Coming Soon','Personal loans from Apex Elite Lending are coming soon, pending Texas licensing.',f'''
 <div class="page-h"><div class="wrap"><span class="pill">Coming soon</span><h1>Personal Loans</h1><p>Pending Texas licensing.</p></div></div>
 <section><div class="wrap" style="max-width:780px"><p>Apex Elite Lending plans to offer small personal installment loans in the future. <b>We are not licensed to make consumer loans yet, and we do not currently offer, make, or arrange personal, family, or household loans.</b> We'll announce here when that changes.</p>
-<div class="notice"><b>Want to know when personal loans are available?</b><br>Email <a href="mailto:{EMAIL}?subject=Personal%20loans%20-%20notify%20me&body=Please%20let%20me%20know%20when%20personal%20loans%20become%20available.">{EMAIL}</a> {TODO} with the subject "Notify me." Joining the interest list is not an application and is not a commitment to lend.</div>
+<div class="notice"><b>Want to know when personal loans are available?</b><br>Email <a href="mailto:{EMAIL}?subject=Personal%20loans%20-%20notify%20me&body=Please%20let%20me%20know%20when%20personal%20loans%20become%20available.">{EMAIL}</a>{todo()} with the subject "Notify me." Joining the interest list is not an application and is not a commitment to lend.</div>
 <div class="notice"><b>New: Personal loans for Jamaica.</b> We're preparing personal loans for borrowers living in Jamaica, launching once licensed by the Bank of Jamaica. <a href="personal-loans-jamaica.html">See Personal Loans: Jamaica</a>.</div>
 <p>If you need funding for a <b>business purpose</b>, see our <a href="business-loans.html">business loans</a>.</p><p class="note">{DISC}</p></div></section>''')
+PLANNED_USES=['Earnest money','Home inspection','Home appraisal','Loan origination fee','Title insurance','Escrow and settlement fees','Property survey','Homeowners insurance','Prepaid property taxes','Moving expenses']
 JMFAQ=[('Can I apply today?','Not yet. Apex Elite Lending is not yet licensed by the Bank of Jamaica, and in Jamaica it is an offence to offer microcredit without a licence. You can join the interest list, and we will contact you when we launch.'),
 ('Is joining the interest list an application?','No. It only tells us you are interested. It is not an application, an approval, or a promise to lend.'),
 ('What interest rate will I pay?','We have not set rates yet. Jamaican law requires a licensed lender to tell you the rate and how it is calculated in writing, and to show the Effective Annual Interest Rate (EAIR) most prominently. You will see all of this before you sign anything.'),
@@ -70,11 +82,16 @@ JMFAQ=[('Can I apply today?','Not yet. Apex Elite Lending is not yet licensed by
 ('Why does the form not ask for my TRN?',"To protect you. We will never ask for your TRN, bank details, or card numbers through this website. After we are licensed, identity checks will be done through a secure process."),
 ('Will I be paid in Jamaican dollars?','We expect loans to be made and repaid in Jamaican dollars (JMD). The USD view in the calculator is only for comparison.'),
 ('How can I check whether a lender is licensed?','The Bank of Jamaica publishes its list of licensed microcredit institutions on its website. Always check it before borrowing from anyone, including us.'),
-('Where can I complain about a lender in Jamaica?','The Consumer Affairs Commission (CAC) handles consumer complaints about licensed microcredit institutions.')]
+('Where can I complain about a lender in Jamaica?','The Consumer Affairs Commission (CAC) handles consumer complaints about licensed microcredit institutions.'),
+('Which home-buying and moving costs are planned?','None are available today. After licensing, we plan to consider personal loans for '+', '.join(PLANNED_USES[:-1])+', and '+PLANNED_USES[-1]+'. These are planned uses, not approved products, and approval is not guaranteed. If borrowed funds are used in a home purchase, the mortgage lender\'s approval and disclosure requirements may apply. Amounts, rates, and terms are not set.')]
 P['personal-loans-jamaica.html']=('Personal Loans: Jamaica (Coming Soon)','Personal loans for borrowers in Jamaica from Apex Elite Lending, coming soon and launching once licensed by the Bank of Jamaica.',f'''
 <div class="page-h"><div class="wrap"><span class="pill">Coming soon</span><h1 style="color:var(--gold)">Personal Loans: Jamaica</h1><p>Launching once licensed by the Bank of Jamaica.</p></div></div>
 <section><div class="wrap" style="max-width:860px"><div class="notice"><b>We are not lending in Jamaica yet.</b> Apex Elite Lending LLC is <b>not currently licensed</b> by the Bank of Jamaica under the Microcredit Act, 2021, and does not offer, make, or arrange personal loans in Jamaica today. We are not taking applications. This page explains our plans so you know what to expect.</div>
 <p>We plan to offer small, fixed-payment personal loans to people living in Jamaica, in Jamaican dollars, with every cost shown in writing before you sign. You can always check whether any lender is licensed on the <a href="https://boj.org.jm/core-functions/financial-system/microcredit-regulation/list-of-licensed-microcredit-institutions/" target="_blank" rel="noopener">Bank of Jamaica's list of licensed microcredit institutions</a>.</p></div></section>
+<section id="planned-uses"><div class="wrap" style="max-width:860px"><h2>Planned personal loan uses</h2>
+<p class="lead">Once personal loans launch in Jamaica, we plan to consider them for home-buying and closing costs, and for moving expenses. These are planned uses only. They are not available today, not approved products, and not a promise that a loan will be approved.</p>
+<ul class="check uses">{''.join(f'<li>{u}</li>' for u in PLANNED_USES)}</ul>
+<p class="note">If borrowed funds are used in a home purchase, the mortgage lender's approval and disclosure requirements may apply. Amounts, rates, and terms for these uses are not set.</p></div></section>
 <section class="alt" id="calculator"><div class="wrap"><h2>Personal loan calculator</h2><p class="lead">See what a loan could cost. This is an illustration only, not an offer, a quote, or our rate.</p>
 <div class="card" style="max-width:720px"><div class="row2"><div><label for="cur">Currency</label><select id="cur"><option value="JMD" selected>Jamaican dollars (JMD)</option><option value="USD">US dollars (USD)</option></select></div>
 <div><label for="fx">Exchange rate (JMD per US$1)</label><input id="fx" type="number" min="1" step="0.5" value="160"></div>
@@ -82,7 +99,7 @@ P['personal-loans-jamaica.html']=('Personal Loans: Jamaica (Coming Soon)','Perso
 <div><label for="jrate">Annual interest rate (%)</label><input id="jrate" type="number" min="0" max="200" step="0.5" value="30"></div>
 <div><label for="jterm">Term (months)</label><input id="jterm" type="number" min="1" max="60" step="1" value="12"></div></div>
 <div class="grid" style="margin-top:18px"><div><p class="note">Monthly payment</p><p class="out" id="jpay">-</p></div><div><p class="note">Total interest</p><p class="out" id="jint">-</p></div><div><p class="note">Total repaid</p><p class="out" id="jtot">-</p></div><div><p class="note">Effective annual rate (EAIR)</p><p class="out" id="jeair">-</p></div></div>
-<h3 style="margin-top:22px">Payment summary</h3><div style="overflow-x:auto"><table id="am" style="width:100%;border-collapse:collapse;font-size:15px"></table></div>
+<h3 style="margin-top:22px">Payment summary</h3><div class="schedule"><table id="am" style="width:100%;border-collapse:collapse;font-size:15px"></table></div>
 <p class="note">Assumes equal monthly payments, interest charged monthly on the remaining balance, and no fees. EAIR = (1 + rate ÷ 12)<sup>12</sup> − 1. The exchange rate is a rough example you can change; check a current rate with your bank or the Bank of Jamaica. Real loans may include fees and different terms, all shown in writing before you sign.</p></div>
 <script>
 const f0=(v,c)=>(c=='JMD'?'J$':'US$')+v.toLocaleString(undefined,{{minimumFractionDigits:2,maximumFractionDigits:2}});
@@ -103,7 +120,7 @@ am.querySelectorAll('td,th').forEach(e=>{{e.style.padding='8px';e.style.borderBo
 <div class="card"><div class="num">3</div><h3>Secure review</h3><p>We verify your identity and check that the loan is affordable for you, as the law requires.</p></div>
 <div class="card"><div class="num">4</div><h3>Written terms, then funding</h3><p>You get the full agreement, with rate, EAIR, fees, and payment dates, before you sign. Then funds are sent and you repay in fixed monthly payments.</p></div></div></div></section>
 <section class="alt" id="interest"><div class="wrap" style="max-width:760px"><h2>Join the interest list</h2><p class="lead">This is not an application. We will only contact you once we are licensed.</p>
-<div class="notice"><b>Do not include sensitive information.</b> Never send your TRN, bank or card numbers, or passwords. When you press Send, your own email app opens with a prefilled message to {EMAIL} {TODO}. Nothing is stored on this website.</div>
+<div class="notice"><b>Do not include sensitive information.</b> Never send your TRN, bank or card numbers, or passwords. When you press Send, your own email app opens with a prefilled message to {EMAIL}{todo()}. Nothing is stored on this website.</div>
 <form class="card" id="jf"><div class="row2"><div><label for="jn">Full name *</label><input id="jn" required autocomplete="name"></div><div><label for="je">Email or phone *</label><input id="je" required autocomplete="email"></div></div>
 <label for="ja">Rough amount you might need *</label><select id="ja" required><option value="">Select…</option><option>Under J$100,000</option><option>J$100,000 to J$250,000</option><option>J$250,000 to J$500,000</option><option>Over J$500,000</option></select>
 <p style="margin-top:18px"><button class="btn" type="submit">Send by email</button></p><p class="note">Joining is not an application and is not a commitment to lend. See our <a href="privacy.html">Privacy Policy</a>.</p></form>
@@ -115,7 +132,8 @@ location.href='mailto:{EMAIL}?subject='+encodeURIComponent('Jamaica personal loa
 <p><b>No offer or guarantee.</b> Calculator results are examples only, not offers, quotes, or our rates. Any future loan will depend on application, identity checks, an affordability review, approval, and a signed written agreement. Approval is never guaranteed.</p>
 <p><b>Rates.</b> When we lend, we will state the interest rate and how it is calculated in writing, show the Effective Annual Interest Rate (EAIR) most prominently, and charge interest and late penalties only on the outstanding balance, as required by the <a href="https://japarliament.gov.jm/attachments/article/339/The%20Microcredit%20Act,%202021.pdf" target="_blank" rel="noopener">Microcredit Act, 2021</a>.</p>
 <p><b>Identity checks.</b> Licensed lenders in Jamaica must verify customer identity and follow anti-money-laundering laws, including the Proceeds of Crime Act.</p>
-<p><b>Complaints.</b> Consumer complaints about licensed microcredit lenders can be made to the Consumer Affairs Commission of Jamaica.</p></div>
+<p><b>Complaints.</b> Consumer complaints about licensed microcredit lenders can be made to the Consumer Affairs Commission of Jamaica.</p>
+<p><b>Planned uses.</b> The home-buying, closing, and moving costs on this page are planned uses only. They are not offers and not approved products. If borrowed funds are used in a home purchase, the mortgage lender's approval and disclosure requirements may apply.</p></div>
 <p>Need a loan for a Texas business? See our <a href="business-loans.html">business loans</a>.</p></div></section>''')
 
 P['about.html']=('About Us','About Apex Elite Lending LLC, a small business lender based in Frisco, Texas.',f'''
@@ -137,14 +155,14 @@ faq=[('Who can apply?','Texas small businesses and business owners who need fund
 P['faq.html']=('FAQ','Frequently asked questions about Apex Elite Lending business loans.','<div class="page-h"><div class="wrap"><h1>Frequently Asked Questions</h1></div></div><section><div class="wrap" style="max-width:820px">'+''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in faq)+'<p style="margin-top:30px">Still have a question? <a href="contact.html">Contact us</a>.</p></div></section>')
 P['contact.html']=('Contact','Contact Apex Elite Lending LLC in Frisco, Texas.',f'''
 <div class="page-h"><div class="wrap"><h1>Contact Us</h1><p>We'd love to hear about your business.</p></div></div>
-<section><div class="wrap"><div class="grid"><div class="card"><h3>Email</h3><p><a href="mailto:{EMAIL}">{EMAIL}</a><br>{TODO}</p></div>
+<section><div class="wrap"><div class="grid"><div class="card"><h3>Email</h3><p><a href="mailto:{EMAIL}">{EMAIL}</a>{todo('<br>')}</p></div>
 <div class="card"><h3>Phone</h3><p><span class="todo">TODO: add business phone</span></p></div>
 <div class="card"><h3>Location</h3><p>Frisco, Texas<br><span class="todo">TODO: add mailing address if desired</span></p></div></div>
 <div class="notice">Please don't email Social Security numbers, bank account numbers, or other sensitive information. We'll arrange a secure way to collect documents if needed.</div>
 <p><a class="btn" href="apply.html">Start an application</a></p></div></section>''')
 P['apply.html']=('Apply','Start a business-purpose loan inquiry with Apex Elite Lending.',f'''
 <div class="page-h"><div class="wrap"><h1>Apply for a Business Loan</h1><p>Start with a quick inquiry. We'll follow up personally.</p></div></div>
-<section><div class="wrap" style="max-width:760px"><div class="notice"><b>Do not include sensitive information.</b> This form never asks for your Social Security number, bank account details, or ID numbers. When you press Send, it opens a prefilled email in your own mail app addressed to {EMAIL} {TODO}. Nothing is stored on this website.</div>
+<section><div class="wrap" style="max-width:760px"><div class="notice"><b>Do not include sensitive information.</b> This form never asks for your Social Security number, bank account details, or ID numbers. When you press Send, it opens a prefilled email in your own mail app addressed to {EMAIL}{todo()}. Nothing is stored on this website.</div>
 <form class="card" id="f"><div class="row2"><div><label for="name">Full name *</label><input id="name" required autocomplete="name"></div><div><label for="biz">Business name *</label><input id="biz" required autocomplete="organization"></div>
 <div><label for="em">Email *</label><input id="em" type="email" required autocomplete="email"></div><div><label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel"></div></div>
 <label for="amt">Amount requested *</label><select id="amt" required><option value="">Select…</option><option>$1,000</option><option>$1,500</option><option>$2,000</option><option>$2,500</option></select>
@@ -163,12 +181,51 @@ P['privacy.html']=('Privacy Policy','Privacy Policy (template) for Apex Elite Le
 <h2>How we use information</h2><p>To respond to inquiries, evaluate business-purpose loan requests, service loans, comply with law, and prevent fraud.</p>
 <h2>Sharing</h2><p>We do not sell personal information. We may share information with service providers, credit bureaus (with your consent), and as required by law. [Attorney: complete, including any GLBA requirements if applicable.]</p>
 <h2>Security</h2><p>We use reasonable safeguards. Please do not send sensitive information such as Social Security or bank account numbers by email or website form.</p>
-<h2>Your choices & contact</h2><p>Questions or requests: <a href="mailto:{EMAIL}">{EMAIL}</a> {TODO}.</p><h2>Changes</h2><p>We may update this policy and will post the revised date above.</p></div></section>''')
+<h2>Your choices & contact</h2><p>Questions or requests: <a href="mailto:{EMAIL}">{EMAIL}</a>{todo()}.</p><h2>Changes</h2><p>We may update this policy and will post the revised date above.</p></div></section>''')
 P['terms.html']=('Terms of Use','Terms of Use (template) for the Apex Elite Lending LLC website.',f'''<div class="page-h"><div class="wrap"><h1>Terms of Use</h1><p>Last updated: [DATE], TEMPLATE</p></div></div><section class="legal"><div class="wrap" style="max-width:820px">{T}
 <h2>About this site</h2><p>This website is operated by Apex Elite Lending LLC, Frisco, Texas. <b>{DISC}</b> Personal loans are coming soon, pending Texas licensing, and are not currently offered.</p>
 <h2>No offer or commitment</h2><p>Information on this site, including rates, amounts, and calculator results, is for illustration only and is not an offer, quote, or commitment to lend. All loans are subject to application, underwriting, approval, and a signed written agreement. Approval is not guaranteed.</p>
 <h2>Business purpose</h2><p>Loans are made only for business, commercial, or similar purposes and not for personal, family, or household purposes.</p>
 <h2>Acceptable use</h2><p>Don't misuse the site, submit false information, or attempt to disrupt it.</p><h2>Disclaimers & limitation of liability</h2><p>The site is provided "as is." [Attorney: complete.]</p>
-<h2>Governing law</h2><p>These terms are governed by the laws of the State of Texas. [Attorney: confirm venue.]</p><h2>Contact</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a> {TODO}</p></div></section>''')
+<h2>Governing law</h2><p>These terms are governed by the laws of the State of Texas. [Attorney: confirm venue.]</p><h2>Contact</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a>{todo()}</p></div></section>''')
 for fn,(t,d,b) in P.items(): open(fn,'w').write(page(fn,t,d,b))
-print(list(P))
+from string import Template
+assets=[f'./{fn}' for fn in P]+[f'./style.css?v={ASSET_VERSION}','./style.css','./manifest.json','./favicon.png','./apple-touch-icon.png','./logo.png']
+open('sw.js','w').write(Template(r'''/* Generated by build.py. Bump ASSET_VERSION there when publishing content changes. */
+const CACHE='$cache';
+const ASSETS=[$assets];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET')return;event.respondWith((async()=>{const url=new URL(req.url);if(url.origin!==self.location.origin)return fetch(req);try{const fresh=await fetch(req);if(fresh&&fresh.ok){const cache=await caches.open(CACHE);cache.put(req,fresh.clone())}return fresh}catch(err){const cached=await caches.match(req);if(cached)return cached;if(req.mode==='navigate'){const home=await caches.match('./index.html');if(home)return home}throw err}})())});
+''').substitute(cache=CACHE_NAME,assets=','.join("'"+a+"'" for a in assets)))
+open('manifest.json','w').write('''{
+  "name": "Apex Elite Lending",
+  "short_name": "Apex Elite",
+  "description": "Apex Elite Lending LLC. Business-purpose loans in Texas. Personal loans in Jamaica are coming soon.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "icons": [
+    {"src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
+    {"src": "logo.png", "sizes": "256x256", "type": "image/png"},
+    {"src": "favicon.png", "sizes": "64x64", "type": "image/png"}
+  ]
+}
+''')
+jamaica=open('personal-loans-jamaica.html').read()
+missing=[u for u in PLANNED_USES if u not in jamaica]
+if missing: raise SystemExit('missing planned uses: '+', '.join(missing))
+for required in ['style="color:var(--gold)"','id="calculator"','Can I apply today?','not currently licensed','Coming soon','id="jn"','id="je"','id="ja"','serviceWorker.register','manifest.json','mortgage lender\'s approval and disclosure requirements may apply','not approved products']:
+    if required not in jamaica: raise SystemExit('jamaica page missing: '+required)
+if 'type="password"' in jamaica.lower() or 'name="ssn"' in jamaica.lower() or 'name="trn"' in jamaica.lower():
+    raise SystemExit('sensitive field added')
+contact=open('contact.html').read()
+for required in ['TODO: add business phone','TODO: add mailing address if desired','contact@apexelitelending.com']:
+    if required not in contact: raise SystemExit('contact page changed: '+required)
+if 'TODO: confirm email' in contact: raise SystemExit('email placeholder returned')
+sw=open('sw.js').read()
+if CACHE_NAME not in sw: raise SystemExit('cache name missing')
+if "req.method!=='GET'" not in sw: raise SystemExit('service worker must ignore non-GET')
+print(list(P), CACHE_NAME, 'uses', len(PLANNED_USES))
